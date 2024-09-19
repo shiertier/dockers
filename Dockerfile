@@ -1,4 +1,4 @@
-FROM shiertier/cuda:12.0.1
+FROM shiertier/cuda:11.8.0
 
 ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai PIP_ROOT_USER_ACTION=ignore PATH="/root/miniconda3/bin:${PATH}"
 ARG PATH="/root/miniconda3/bin:${PATH}"
