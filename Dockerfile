@@ -1,9 +1,4 @@
 FROM nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
-FROM nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
-=======
-FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
->>>>>>> 67928b2e194a71c1253aa485212d54c4ff0f66b6
 
 ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai PIP_ROOT_USER_ACTION=ignore
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone && \
