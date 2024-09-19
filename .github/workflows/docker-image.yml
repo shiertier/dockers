@@ -33,17 +33,17 @@ jobs:
       - name: Extract CUDA version from Dockerfile
         id: extract_cuda_version
         run: |
-          CUDA_VERSION=$(grep -oP '(?<=FROM shiertier/cuda:)[0-9]+\.[0-9]+' Dockerfile)
+          CUDA_VERSION=$(grep -oP '(?<=FROM shiertier/cuda-py:).*' Dockerfile)
           echo "::set-output name=cudavision::$CUDA_VERSION"
 
       - name: Extract Miniconda version from Dockerfile
         id: extract_miniconda_version
         run: |
-          MINICONDA_VERSION=$(grep -oP '(?<=RUN cd /root && wget https://repo.anaconda.com/miniconda/Miniconda3-)[^_]+' Dockerfile)
-          echo "::set-output name=tag::$MINICONDA_VERSION"
+          PYTORCH_VERSION=$(grep -oP '(?<=RUN pip install --no-cache-dir torch==)[^ ]+' Dockerfile)
+          echo "::set-output name=tag::$PYTORCH_VERSION"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: shiertier/cuda-py:cu${{ steps.extract_cuda_version.outputs.cudavision }}-${{ steps.extract_miniconda_version.outputs.tag }}
+          tags: shiertier/pytorch:torch--${{ steps.extract_miniconda_version.outputs.tag }}-${{ steps.extract_cuda_version.outputs.cudavision }}
