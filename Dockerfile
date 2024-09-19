@@ -14,4 +14,4 @@ RUN cd /root && wget https://repo.anaconda.com/miniconda/Miniconda3-py310_24.7.1
     bash *.sh -b -u && ~/miniconda3/bin/conda init bash && rm -rf Miniconda3* ~/.cache
 
 # 安装python包
-RUN pip install --no-cache-dir tensorboard jupyterlab jupyterlab-language-pack-zh-CN && echo '{"locale": "zh_CN"}' > "~/.jupyter/lab/user-settings/\@jupyterlab/translation-extension/plugin.jupyterlab-settings"
+RUN pip install --no-cache-dir tensorboard jupyterlab jupyterlab-language-pack-zh-CN
