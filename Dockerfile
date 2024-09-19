@@ -1,5 +1,4 @@
-# cuda:11.7
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:11.0.3-cudnn8-devel-ubuntu20.04
 
 # 基础apt
 ENV DEBIAN_FRONTEND=noninteractive TZ=Asia/Shanghai PIP_ROOT_USER_ACTION=ignore PATH="/root/miniconda3/bin:${PATH}"
