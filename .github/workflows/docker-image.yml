@@ -26,7 +26,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: List files in workspace
+        run: ls -la
+
+      - name: Print current directory
+        run: pwd
+        
       - name: Extract tag from Dockerfile
         id: extract_tag
         run: |
