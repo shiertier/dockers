@@ -30,7 +30,7 @@ jobs:
       - name: Extract tag from Dockerfile
         id: extract_tag
         run: |
-          cd ./${{ github.ref }}
+          cd ./docker
           TAG=$(head -n 1 Dockerfile | sed 's/^# //')
           echo "::set-output name=tag::$TAG"
 
