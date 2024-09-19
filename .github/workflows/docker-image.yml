@@ -41,6 +41,11 @@ jobs:
         run: |
           PYTORCH_VERSION=$(grep -oP '(?<=RUN pip install --no-cache-dir torch==)[^ ]+' Dockerfile)
           echo "::set-output name=tag::$PYTORCH_VERSION"
+          
+      - name: Clean up /opt directory
+        run: |
+          cd /opt
+          find . -maxdepth 1 -mindepth 1 '!' -path ./containerd '!' -path ./actionarchivecache '!' -path ./runner '!' -path ./runner-cache -exec rm -rf '{}' ';'
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
