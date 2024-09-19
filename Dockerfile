@@ -22,4 +22,4 @@ RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.l
     apt-get update && apt-get install gh && apt-get clean && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/*
 
 WORKDIR /root
-CMD ["bash", "/root/start.sh"]
+CMD ["bash"]
