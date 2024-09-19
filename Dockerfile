@@ -1,3 +1,4 @@
+# cuda:124
 FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 
 # 基础apt
@@ -15,16 +16,10 @@ RUN sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.l
     apt-get install -y libssh2-1-dev ca-certificates libfreetype6-dev mlocate swig llvm libncursesw5-dev tk-dev && \
     apt-get install -y build-essential yasm libnss3 sudo psmisc sox libsox-dev ffmpeg libavdevice-dev libtcmalloc-minimal4 bc openjdk-8-jdk && \
     git lfs install && \
-    apt-get install -y openmpi-bin openmpi-common libopenmpi-dev && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# 安装git
-RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    apt-get install -y openmpi-bin openmpi-common libopenmpi-dev && apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
     apt-get update && apt-get install gh && apt-get clean && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/*
 
-# 添加webos目录
-# ADD /mnt/chenyu-nvme/scripts/webos /webos
-
 WORKDIR /root
-RUN wget https://raw.githubusercontent.com/shiertier/chenyu_start/main/start.sh && chmod +x /root/start.sh
 CMD ["bash", "/root/start.sh"]
