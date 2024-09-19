@@ -27,8 +27,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Extract tag from Dockerfile
+        id: extract_tag
+        run: |
+          TAG=$(head -n 1 Dockerfile | sed 's/^# //')
+          echo "::set-output name=tag::$TAG"
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: shiertier/cuda:124
+          tags: shiertier/${{ steps.extract_tag.outputs.tag }}
+
