@@ -1,8 +1,9 @@
 name: Publish Docker image
 
 on:
-    release:
-      types: [published]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   push_to_registry:
@@ -31,4 +32,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: user/app:latest
+          tags: shiertier/cuda:124
