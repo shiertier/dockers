@@ -2,7 +2,8 @@ name: Publish Docker image
 
 on:
   push:
-    tags: cuda**
+    branches:
+      - '**'
 
 jobs:
   push_to_registry:
@@ -14,6 +15,8 @@ jobs:
       attestations: write
       id-token: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -26,27 +29,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: List files in workspace
-        run: ls -la
-
-      - name: Print current directory
-        run: pwd
-        
       - name: Extract tag from Dockerfile
         id: extract_tag
         run: |
-          git clone https://github.com/shiertier/dockers
-          cd ./dockers
-          TAG=$(head -n 1 Dockerfile | sed 's/^# //')
+          TAG=$(grep -oP '(?<=FROM nvidia/cuda:)[^-]+' Dockerfile)
           echo "::set-output name=tag::$TAG"
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: shiertier/${{ steps.extract_tag.outputs.tag }}
-
+          tags: shiertier/cuda:${{ steps.extract_tag.outputs.tag }}
