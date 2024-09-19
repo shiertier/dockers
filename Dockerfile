@@ -1,4 +1,4 @@
-# cuda:124
+# cuda:12.4
 FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 
 # 基础apt
