@@ -39,7 +39,7 @@ jobs:
       - name: Extract Miniconda version from Dockerfile
         id: extract_miniconda_version
         run: |
-          PYTORCH_VERSION=$(grep -oP '(?<=RUN pip install --no-cache-dir torch==)[^ ]+' Dockerfile)
+          PYTORCH_VERSION=$(grep -oP '(?<=RUN pip install --no-cache-dir tensorflow==)[^ ]+' Dockerfile)
           echo "::set-output name=tag::$PYTORCH_VERSION"
           
       - name: Clean up /opt directory
@@ -51,4 +51,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: shiertier/pytorch:torch${{ steps.extract_miniconda_version.outputs.tag }}-${{ steps.extract_cuda_version.outputs.cudavision }}
+          tags: shiertier/pytorch:tensorflow${{ steps.extract_miniconda_version.outputs.tag }}-${{ steps.extract_cuda_version.outputs.cudavision }}
