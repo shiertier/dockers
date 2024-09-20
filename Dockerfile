@@ -1,2 +1,2 @@
-FROM shiertier/cuda-py:cu11.8-py312
+FROM shiertier/cuda-py:cu12.3-py38
 RUN python -m pip install paddlepaddle-gpu==3.0.0b1 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html --no-cache-dir
