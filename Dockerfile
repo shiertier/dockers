@@ -1,2 +1,2 @@
 FROM shiertier/cuda-py:cu12.3-py312
-RUN pip install --no-cache-dir tensorflow==2.16.0 tensorboard
+RUN pip install --no-cache-dir tensorflow==2.17.0 tensorboard
