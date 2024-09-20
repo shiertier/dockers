@@ -39,7 +39,7 @@ jobs:
       - name: Extract Miniconda version from Dockerfile
         id: extract_miniconda_version
         run: |
-          PYTORCH_VERSION=$(grep -oP '(?<=RUN python -m pip install paddlepaddle-gpu==)[^.post]+' Dockerfile)
+          PYTORCH_VERSION=$(grep -oP '(?<=python -m pip install paddlepaddle-gpu==)\d+(\.\d+)*' Dockerfile)
           echo "::set-output name=tag::$PYTORCH_VERSION"
           
       - name: Clean up /opt directory
