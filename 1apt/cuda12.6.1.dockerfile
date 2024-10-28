@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/shiertier/base:12.6.2
+FROM registry.cn-hangzhou.aliyuncs.com/shiertier/base:cuda12.6.2
 ENV DEBIAN_FRONTEND=noninteractive PATH="/root/miniconda3/bin:${PATH}" TZ=Asia/Shanghai PIP_ROOT_USER_ACTION=ignore
 ARG PATH="/root/miniconda3/bin:${PATH}"
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone && \
