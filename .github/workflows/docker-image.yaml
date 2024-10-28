@@ -1,0 +1,43 @@
+name: Docker Squash and Push
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  squash_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install docker-squash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install docker-squash
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Pull NVIDIA CUDA image
+        run: |
+          docker pull nvcr.io/nvidia/cuda:12.6.2-cudnn-devel-ubuntu22.04
+
+      - name: Squash Docker image
+        run: |
+          docker pull nvcr.io/nvidia/cuda:12.6.2-cudnn-devel-ubuntu22.04
+          docker-squash -f 70 -t cuda:12.6 nvcr.io/nvidia/cuda:12.6.2-cudnn-devel-ubuntu22.04
+
+      - name: Login to Aliyun Container Registry
+        run: echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login registry.cn-hangzhou.aliyuncs.com --username=hollybody --password-stdin
+
+      - name: Tag the squashed image
+        run: |
+          docker tag cuda:12.6 registry.cn-hangzhou.aliyuncs.com/shiertier/cuda:12.6.2
+
+      - name: Push to Aliyun Container Registry
+        run: |
+          docker push registry.cn-hangzhou.aliyuncs.com/shiertier/cuda:12.6.2
