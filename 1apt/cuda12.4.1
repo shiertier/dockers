@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/shiertier/base:cuda12.6.2
+FROM registry.cn-hangzhou.aliyuncs.com/shiertier/base:cuda12.4.1
 ENV DEBIAN_FRONTEND=noninteractive PATH="/root/miniconda3/bin:${PATH}" TZ=Asia/Shanghai PIP_ROOT_USER_ACTION=ignore
 ARG PATH="/root/miniconda3/bin:${PATH}"
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone && \
@@ -15,4 +15,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone
     apt-get install -y openmpi-bin openmpi-common libopenmpi-dev && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
-    apt-get update && apt-get install gh && apt-get clean && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/* 
+    apt-get update && apt-get install gh && apt-get clean && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/*

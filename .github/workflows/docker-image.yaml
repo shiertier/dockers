@@ -35,16 +35,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Check if image exists
-        id: check_image
+      - name: Build and push Docker images
         run: |
-          IMAGE_EXISTS=$(docker manifest inspect shiertier/base:cuda12.6.1 > /dev/null 2>&1 && echo "true" || echo "false")
-          echo "::set-output name=exists::$IMAGE_EXISTS"
-
-      - name: Build and push Docker image
-        if: steps.check_image.outputs.exists == 'false'
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: shiertier/base:cuda12.6.1
-          file: ./1apt/cuda12.6.1.dockerfile
+          for version in 12.5.1 12.4.1 12.3.2 12.2.2 12.1.1 12.0.1 11.8.0 11.7.1; do
+            docker build -t shiertier/base:cuda$version -f ./1apt/cuda$version .
+            docker push shiertier/base:cuda$version
+          done
