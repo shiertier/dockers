@@ -1,0 +1,8 @@
+FROM base:cuda12.1.1
+ENV DEBIAN_FRONTEND=noninteractive PATH="/root/miniconda3/bin:${PATH}" TZ=Asia/Shanghai PIP_ROOT_USER_ACTION=ignore
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN mkdir -p /root/cache && cd /root/cache && wget https://repo.anaconda.com/miniconda/Miniconda3-py312_24.7.1-0-Linux-x86_64.sh && \
+    bash *.sh -b -u -p /root/miniconda3 && /root/miniconda3/bin/conda init bash && rm -rf Miniconda3* /root/cache && \
+    cd /root && pip install --no-cache-dir jupyterlab jupyterlab-language-pack-zh-CN && \
+    cd /root && wget https://raw.githubusercontent.com/shiertier/chenyu_start/main/start.sh && chmod +x /root/start.sh
+CMD ["bash", "/root/start.sh"]
