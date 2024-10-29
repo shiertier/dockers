@@ -38,6 +38,6 @@ jobs:
       - name: Build and push Docker images
         run: |
           for py_version in 37 38 39 310 311 312 ; do
-            docker build -t shiertier/base:cuda12.4.1-py$py_version -f ./2python/cuda12.4.1-py$py_version .
-            docker push shiertier/base:cuda12.4.1-py$py_version
+            docker build -t shiertier/base:cuda12.5.1-py$py_version -f ./2python/cuda12.5.1-py$py_version .
+            docker push shiertier/base:cuda12.5.1-py$py_version
           done
