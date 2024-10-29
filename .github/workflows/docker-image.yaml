@@ -37,7 +37,7 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          for version in 12.2.2 12.1.1 12.0.1 11.8.0 11.7.1; do
+          for 11.8.0 11.7.1; do
             docker build -t shiertier/base:cuda$version -f ./1apt/cuda$version .
             docker push shiertier/base:cuda$version
           done
