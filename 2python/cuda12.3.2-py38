@@ -1,4 +1,4 @@
-FROM base:cuda12.3.2
+FROM shiertier/base:cuda12.3.2
 ENV DEBIAN_FRONTEND=noninteractive PATH="/root/miniconda3/bin:${PATH}" TZ=Asia/Shanghai PIP_ROOT_USER_ACTION=ignore
 ARG PATH="/root/miniconda3/bin:${PATH}"
 RUN mkdir -p /root/cache && cd /root/cache && wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.11.0-2-Linux-x86_64.sh && \
