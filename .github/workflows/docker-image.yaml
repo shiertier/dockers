@@ -37,7 +37,7 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          for py_version in 312 311 310 39 38 37:
-              docker build -t shiertier/base:cuda11.7.1-py$py_version -f ./2python/cuda11.7.1-py$py_version .
-              docker push shiertier/base:cuda11.7.1-py$py_version
+          for py_version in 312 311 310 39 38 37; do
+            docker build -t shiertier/base:cuda11.7.1-py$py_version -f ./2python/cuda11.7.1-py$py_version .
+            docker push shiertier/base:cuda11.7.1-py$py_version
           done
