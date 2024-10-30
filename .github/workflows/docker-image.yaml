@@ -42,6 +42,5 @@ jobs:
             tag="${dockerfile%.Dockerfile}"
             docker build -t shiertier/base:$tag -f $dockerfile .
             docker push shiertier/base:$tag
-            docker rmi shiertier/base:$tag
             docker system prune
           done
