@@ -37,10 +37,11 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          cd ./3torch/cu124-py312
+          cd ./3torch/cu118-py38
           for dockerfile in *.Dockerfile; do
             tag="${dockerfile%.Dockerfile}"
             docker build -t shiertier/base:$tag -f $dockerfile .
             docker push shiertier/base:$tag
             docker rmi shiertier/base:$tag
+            docker system prune
           done
